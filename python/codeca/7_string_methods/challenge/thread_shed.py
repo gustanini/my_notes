@@ -142,3 +142,4 @@ sales = []
 thread_sold = []
 
 # Append the customers name to customers. Append the amount of the sale to sales. Append the threads sold to thread_sold.
+

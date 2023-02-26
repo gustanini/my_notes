@@ -108,38 +108,66 @@ green&white;,;09/15/17,   Gail Phelps   ;,;$30.52
 #------------------------------------------------
 # Start coding below!
 
-# Replace all the instances of ;,; in daily_sales with some other character and save the result to daily_sales_replaced
+#replace ;,;
+daily_sales_replaced = daily_sales.replace(";,;", ";")
 
-daily_sales_replaced = daily_sales.replace(';,;', ';')
-#print(daily_sales_replaced)
-
-# Split daily_sales_replaced around commas and save it to a new list daily_transactions
-
+#split at ,
 daily_transactions = daily_sales_replaced.split(',')
-#print(daily_transactions)
 
-# Our next step is to split each individual transaction into a list of its data points
-
+#new list
 daily_transactions_split = []
+#split at ; (sublists)
+for daily_transaction in daily_transactions:
+  daily_transactions_split.append(daily_transaction.split(';'))
 
-# Append each of these split strings (which are lists now) to our new list daily_transactions_split
+#new list
+daily_transactions_clean = daily_transactions_split
+#strip whitespace from elements within lists of a list
+daily_transactions_clean = [[daily_transaction.strip() for daily_transaction in lists] for lists in daily_transactions_clean]
 
-for name in daily_transactions:
-  daily_transactions_split.append(name.split(','))
+#test
+#print(daily_transactions_clean)
 
-#print(daily_transactions_split)
-
-# Add each of these cleaned up transactions to the new list transactions_clean
-
-daily_transactions_clean = []
-
-# I need to iterate thru the main list daily_transactions, then iterate through each element inside to strip them from whitespace and then add the new lists into daily_transactions_clean
-
-# Create three empty lists. customers, sales, and thread_sold
-
+#new lists for each element
 customers = []
 sales = []
 thread_sold = []
+#populate each list
+for sub_lists in daily_transactions_clean:
+  customers.append(sub_lists[0])
+  sales.append(sub_lists[1])
+  thread_sold.append(sub_lists[2])
+#test
+#print(customers)
+#print(sales)
+#print(thread_sold)
 
-# Append the customers name to customers. Append the amount of the sale to sales. Append the threads sold to thread_sold.
+#calculate total sales, make lists
+total_sales = 0
+sales_clean = [float(sale.replace('$', '')) for sale in sales]
+#add values
+for sale in sales_clean:
+  total_sales += sale
+#test
+#print(total_sales)
 
+#calculate how many individual colors were sold
+
+#make list
+thread_sold_split = []
+#iterate through list, split multi into single and append all colors to list
+for item in thread_sold:
+  for color in item.split('&'):
+    thread_sold_split.append(color)
+#test
+#print(thread_sold_split)
+
+#make function and test
+def color_count(color):
+  return thread_sold_split.count(f"{color}")
+#print(color_count("white"))
+
+colors = ['red', 'yellow', 'green', 'white', 'black', 'blue', 'purple']
+
+for color in colors:
+  print(f"{color_count(color)} {color} threads were sold.")

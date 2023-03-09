@@ -26,8 +26,11 @@ namespace PlanetCalculations
 
       // Log calculations to console
       Console.WriteLine(userAge);
+
       Console.WriteLine(jupiterAge);
+      
       Console.WriteLine(newEarthAge);
+      
       Console.WriteLine(newJupiterAge);
     }
   }
